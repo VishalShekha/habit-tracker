@@ -13,6 +13,13 @@
       "maxDurationMinutes": 420,
       "resetAt": "2026-09-26T00:00:00.000Z",
       "notified": false
+    },
+    {
+      "id": "test-muhvdbkf",
+      "name": "Test",
+      "maxDurationMinutes": 1,
+      "resetAt": "2026-09-26T04:08:14.799Z",
+      "notified": false
     }
   ]
 }

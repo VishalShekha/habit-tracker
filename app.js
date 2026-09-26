@@ -1,7 +1,7 @@
 // ---- CONFIG: edit these three lines for your repo ----
 const CONFIG = {
-  owner: "YOUR_GITHUB_USERNAME",
-  repo: "YOUR_REPO_NAME",
+  owner: "VishalShekha",
+  repo: "habit-tracker",
   branch: "main",
   dataPath: "data/activities.json",
 };

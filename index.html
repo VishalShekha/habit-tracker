@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Health Monitor</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <h1>Health monitor</h1>
+      <p class="subtitle">Reset a timer when you do the thing. Watch it count down.</p>
+    </header>
+
+    <section id="activities" class="activities" aria-live="polite">
+      <!-- activity rows are rendered here by app.js -->
+    </section>
+
+    <button id="addBtn" class="add-btn" title="Add activity" aria-label="Add activity">+</button>
+  </main>
+
+  <!-- Add-activity dialog -->
+  <dialog id="addDialog">
+    <form id="addForm" method="dialog" class="add-form">
+      <h2>New activity</h2>
+      <label>
+        Name
+        <input type="text" id="newName" required placeholder="e.g. Water" />
+      </label>
+      <div class="row">
+        <label>
+          Hours
+          <input type="number" id="newHours" min="0" max="999" value="0" />
+        </label>
+        <label>
+          Minutes
+          <input type="number" id="newMinutes" min="0" max="59" value="0" />
+        </label>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" id="cancelAdd" class="btn-secondary">Cancel</button>
+        <button type="submit" id="confirmAdd" class="btn-primary">Add activity</button>
+      </div>
+    </form>
+  </dialog>
+
+  <p class="status-line" id="statusLine"></p>
+
+  <script src="app.js"></script>
+</body>
+</html>

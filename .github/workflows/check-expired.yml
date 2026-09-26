@@ -1,0 +1,49 @@
+name: Check expired activities
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # every 15 minutes
+  workflow_dispatch:          # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write            # needed so the automatic GITHUB_TOKEN can commit the updated JSON
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run expiry check
+        id: check
+        run: node scripts/check-expired.js
+
+      - name: Send email if something expired
+        if: steps.check.outputs.has_expired == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Health monitor: ${{ steps.check.outputs.expired_list }} expired"
+          to: ${{ secrets.MAIL_TO }}
+          from: Health Monitor
+          body: |
+            The following activities just hit zero:
+            ${{ steps.check.outputs.expired_list }}
+
+            Go reset them: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+
+      - name: Commit updated activities.json
+        if: steps.check.outputs.has_expired == 'true'
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: mark expired activities as notified"
+          file_pattern: data/activities.json

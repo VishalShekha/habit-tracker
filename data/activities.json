@@ -12,7 +12,7 @@
       "name": "Sleep",
       "maxDurationMinutes": 420,
       "resetAt": "2026-09-26T04:12:59.667Z",
-      "notified": false
+      "notified": true
     },
     {
       "id": "test-muhvdbkf",

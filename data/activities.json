@@ -26,7 +26,7 @@
       "name": "cjeicje",
       "maxDurationMinutes": 60,
       "resetAt": "2026-09-27T13:34:20.472Z",
-      "notified": false
+      "notified": true
     }
   ]
 }
